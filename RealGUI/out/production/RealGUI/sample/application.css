@@ -1,0 +1,53 @@
+.root{
+    -fx-background-image: url("Images/BrickSlayerBackground.png");
+}
+
+.label{
+    -fx-font-size: 20;
+    -fx-font-family: "lucida Console";
+    -fx-text-fill: "white";
+    -fx-alignment: center;
+}
+
+#copyLabel{
+    -fx-font-size: 15;
+    -fx-font-family: "lucida Console";
+    -fx-text-fill: #2E3641;
+    -fx-alignment: center;
+}
+
+#backToMenuLabel{
+    -fx-font-size: 15;
+    -fx-font-family: "lucida Console";
+    -fx-text-fill: "White";
+    -fx-alignment: center;
+}
+
+
+#headerLabel{
+    -fx-font-size: 40;
+}
+
+
+.button {
+    -fx-font-weight: bold;
+    -fx-background-color: #2E3641;
+    -fx-font-size: 16;
+    -fx-text-fill: white;
+    -fx-alignment: center;
+}
+
+.button:hover{
+    -fx-font-weight: bold;
+    -fx-background-color: "white";
+    -fx-font-size: 16;
+    -fx-text-fill: #2E3641;
+}
+
+
+.button:pressed{
+     -fx-font-weight: bold;
+     -fx-background-color: "white";
+     -fx-font-size: 16;
+     -fx-text-fill: #2E3641;
+}
