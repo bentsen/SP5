@@ -8,53 +8,70 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
+import java.util.Random;
+
 import static sample.Constants.*;
 
-public class Ball {
-    private ImageView imageView;
-    ImageViewGameObj ball;
-    ImageViewGameObj paddle;
-    int  dy = 3;
+public class Ball extends ImageViewGameObj{
+    int dy;
+    int dx;
 
     public Ball(Pane root)
     {
-
-        ball = new ImageViewGameObj(root,"/sample/Images/defaultBall.png");
-        ball.setY(height - ball.getHeight() -100);
-        ball.setX((width - ball.getWidth())/2);
-//        timeLine(ball, paddle);
-
+        super(root, Main.ballSkinsURL.get(0));
+        dx = 0;
+        dy = 0;
 
     }
 
-    public void timeLine(ImageViewGameObj a, ImageViewGameObj b)
+    /**
+     * Moves the ball according to it's velocity without any bouncing.
+     */
+    public void move() {
+        this.setY(this.getY() + this.getDy());
+        this.setX(this.getX() + this.getDx());
+    }
+
+    public static int randInRange(int min, int max) {
+        Random r = new Random();
+        return r.ints(min, (max + 1)).findFirst().getAsInt();
+    }
+
+
+    // returns the centre x point of the ball
+    public double getX()
     {
-        Timeline timeline = new Timeline(new KeyFrame(
-                Duration.millis(100),
-                (evt) ->{a.setY(a.getY() + dy);
-                    if (a.getBounds().intersects(b.getBounds()))
-                    {
-                        dy = -dy;
-                    } }
-        ));
-        timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.play();
+        return super.getX()+this.getHalfWidth();
     }
 
-    public double getX(){
-        return ball.getX();
-    }
-
-    public double getY(){
-        return ball.getY();
-    }
-
-    public Bounds getBounds()
+    public double getY()
     {
-        return imageView.getBoundsInParent();
+        return super.getY() + this.getHalfHeight();
     }
 
+    public void setX(double cx)
+    {
+        super.setX(cx - this.getHalfWidth());
+    }
 
+    public void setY(double cy)
+    {
+        super.setY(cy - this.getHalfHeight());
+    }
 
+    public int getDy() {
+        return dy;
+    }
 
+    public int getDx() {
+        return dx;
+    }
+
+    public void setDy(int dy) {
+        this.dy = dy;
+    }
+
+    public void setDx(int dx) {
+        this.dx = dx;
+    }
 }

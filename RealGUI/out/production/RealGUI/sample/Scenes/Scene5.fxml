@@ -20,7 +20,7 @@
             <Image url="@../Images/Maps/Map1.png" />
          </image>
       </ImageView>
-      <Label fx:id="headerLabel" layoutX="244.0" layoutY="273.0" onMouseClicked="#lastLevel" prefHeight="22.0" prefWidth="44.0" text="&lt;">
+      <Label fx:id="headerLabel" layoutX="244.0" layoutY="299.0" onMouseClicked="#lastLevel" prefHeight="22.0" prefWidth="44.0" text="&lt;">
          <font>
             <Font size="1.0" />
          </font>
@@ -28,7 +28,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Label fx:id="headerLabel" layoutX="713.0" layoutY="273.0" onMouseClicked="#nextLevel" prefHeight="22.0" prefWidth="44.0" text="&gt;">
+      <Label fx:id="headerLabel" layoutX="713.0" layoutY="299.0" onMouseClicked="#nextLevel" prefHeight="22.0" prefWidth="44.0" text="&gt;">
          <font>
             <Font size="1.0" />
          </font>
@@ -36,17 +36,17 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Label fx:id="headerLabel" layoutX="398.0" layoutY="95.0" prefHeight="95.0" prefWidth="210.0" text="Level 1">
+      <Label fx:id="headerLabel" layoutX="398.0" layoutY="121.0" prefHeight="95.0" prefWidth="210.0" text="Level 1">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <Button layoutX="422.0" layoutY="431.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="163.0" text="Continue">
+      <Button layoutX="422.0" layoutY="457.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="163.0" text="Continue">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <ImageView fx:id="imageLocked" fitHeight="188.0" fitWidth="383.0" layoutX="315.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imageLocked" fitHeight="188.0" fitWidth="383.0" layoutX="315.0" layoutY="216.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/MapLocked.png" />
          </image>
@@ -57,5 +57,10 @@
          </image>
       </ImageView>
       <Label fx:id="currencyLabel" layoutX="910.0" layoutY="25.0" text="0" />
+      <ImageView fitHeight="70.0" fitWidth="177.0" layoutX="415.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/MapsLabel.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

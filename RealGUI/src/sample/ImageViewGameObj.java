@@ -11,6 +11,9 @@ import javafx.util.Duration;
 
 public class ImageViewGameObj {
     private ImageView imageView;
+    private double speed = 10;
+    private String url;
+
 
 
     public ImageViewGameObj(Pane root, String url)
@@ -29,7 +32,9 @@ public class ImageViewGameObj {
     }
 
 
-
+    public double getSpeed() {
+        return speed;
+    }
     public ImageView getImageView() {
         return imageView;
     }
@@ -69,5 +74,29 @@ public class ImageViewGameObj {
     public Bounds getBounds()
     {
         return imageView.getBoundsInParent();
+    }
+
+
+    public double getHalfWidth()
+    {
+        return this.getWidth() / 2;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public double getHalfHeight()
+    {
+        return this.getHeight() / 2;
+    }
+
+    @Override
+    public String toString() {
+        return "[GameObj: (" + this.getX() + ", " + this.getY() + ")]";
     }
 }

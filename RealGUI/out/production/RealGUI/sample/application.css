@@ -35,13 +35,19 @@
     -fx-font-size: 16;
     -fx-text-fill: white;
     -fx-alignment: center;
+    transition: box-shadow 0.3 ease, transform 0.3s ease;
 }
 
 .button:hover{
     -fx-font-weight: bold;
     -fx-background-color: "white";
-    -fx-font-size: 16;
+    -fx-font-size: 18;
     -fx-text-fill: #2E3641;
+}
+
+.button:active{
+    box-shadow: 0 0 0 #930, insert 4px 4px 4px #930;
+    transform: translate(6px, 6px);
 }
 
 

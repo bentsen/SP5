@@ -65,7 +65,7 @@ public class Scene5Controller implements Initializable {
 
     public void nextLevel(MouseEvent mouseEvent)
     {
-        if(count <= 9) {
+        if(count < 10) {
 
             count++;
             arrayCount++;
@@ -74,7 +74,6 @@ public class Scene5Controller implements Initializable {
             myImage = new Image(getClass().getResourceAsStream(Image));
             headerLabel.setText("Level " + (count));
             myImageView.setImage(myImage);
-
 
             if(maps.get(arrayCount).getLocked() == true)
             {
@@ -87,18 +86,18 @@ public class Scene5Controller implements Initializable {
                 imageLocked.visibleProperty().set(false);
             }
 
+
         }
 
     }
 
-    public void lastLevel(MouseEvent mouseEvent)        //bug
+    public void lastLevel(MouseEvent mouseEvent)
     {
 
         if(count >= 2)
         {
             count--;
             arrayCount--;
-
             Image = "Images/Maps/Map" + (count) +".png";
             myImage = new Image(getClass().getResourceAsStream(Image));
             headerLabel.setText("Level " + (count));
@@ -121,6 +120,7 @@ public class Scene5Controller implements Initializable {
 
     public void mapCompleted()
     {
+        //the maps should come from sql
         Map map = new Map(1,false);
         Map map2 = new Map(2,true);
         Map map3 = new Map(3,true);
@@ -129,6 +129,8 @@ public class Scene5Controller implements Initializable {
         Map map6 = new Map(6,true);
         Map map7 = new Map(7,true);
         Map map8 = new Map(8,true);
+        Map map9 = new Map(9,true);
+        Map map10 = new Map(10,true);
         maps.add(map);
         maps.add(map2);
         maps.add(map3);
@@ -136,7 +138,9 @@ public class Scene5Controller implements Initializable {
         maps.add(map5);
         maps.add(map6);
         maps.add(map7);
-
+        maps.add(map8);
+        maps.add(map9);
+        maps.add(map10);
     }
 
 }
