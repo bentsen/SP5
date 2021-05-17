@@ -28,8 +28,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static sample.Constants.height;
-import static sample.Constants.width;
+import static sample.Constants.*;
+
 
 public class Controller implements Initializable {
 
@@ -207,7 +207,7 @@ public class Controller implements Initializable {
         String css = this.getClass().getResource("application.css").toExternalForm();
         Stage gameStage = new Stage();
         BrickSlayer brickSlayer = new BrickSlayer();
-        Scene scene = new Scene(brickSlayer.getRoot(), width, height);
+        Scene scene = new Scene(brickSlayer.getRoot(),sceneWidth,sceneHeight);
         gameStage.setScene(scene);
         gameStage.show();
         Image image = new Image(new File("src/sample/Images/BrickIcon.png").toURI().toString());

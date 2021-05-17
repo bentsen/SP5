@@ -19,7 +19,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -49,63 +48,29 @@ public class BrickSlayer {
     private boolean testTop = false;
     private double delayMs = 10; // Delay for the timeline.
     private double mx; // Variable to store the mouse's X position.
-    private boolean bounceBottom = false; // If true, the ball will bounce off the bottom and the game won't end.
+    private boolean bounceBottom = false; // If true, the ball will bounce off the bottom (used for quick testing).
     private int lives = 3;
-    boolean hit = false; // Initializes a boolean to use for ball and block collisions.
-    int dx, dy; // Initializes dx and dy that will be used for changing the velocity of the ball.
+    boolean hit = false; // a boolean to used for collision between ball and brick .
+    int dx, dy; // dx and dy used for changing the velocity of the ball.
 
 
 
     public BrickSlayer() {
         root = new Pane();
         playAudio();
-        Main.paddleSkinsURL.add("sample/Images/Paddles/paddle_og2.png"); // if no skin is picked Default paddleSkin will be used
-        Main.ballSkinsURL.add("sample/Images/Balls/defaultBall.png"); // if no skin is picked, Default ballSkin will be used
-        paddle = new Paddle(root, Main.paddleSkinsURL.get(0));
-
-        paddle.setY(height - paddle.getHeight() - 10);
-        paddle.setX((width / 2 - paddle.getHalfWidth()));
-        life1 = new ImageViewGameObj(root,"sample/Images/BrickSlayerHeart.png",30,30);
-        life1.setY(15);
-        life1.setX(15);
-        life2  = new ImageViewGameObj(root,"sample/Images/BrickSlayerHeart.png",30,30);
-        life2.setY(15);
-        life2.setX(45);
-        life3  = new ImageViewGameObj(root,"sample/Images/BrickSlayerHeart.png",30,30);
-        life3.setY(15);
-        life3.setX(75);
-
-        coin = new ImageViewGameObj(root,"sample/Images/Coin.png",38,35);
-        coin.setY(18);
-        coin.setX(930);
-
-        numberOfCoins = new Label();
-        numberOfCoins.setTranslateY(25.5);
-        numberOfCoins.setTranslateX(870);
-        numberOfCoins.setText(String.valueOf(coins));
-        AnchorPane.setLeftAnchor(numberOfCoins,852.0);
-        AnchorPane.setRightAnchor(numberOfCoins,58.0);
-        numberOfCoins.setPrefWidth(90);
-        numberOfCoins.setPrefHeight(21);
-        numberOfCoins.setAlignment(Pos.CENTER_RIGHT);
-        root.getChildren().add(numberOfCoins);
-
-
-
-
+        paddleAndBall();
+        heartsAndCoins();
+        numCoins();
         start();
-
-
         brickLayer();
+        playTime();
 
-        ball = new Ball(root);
-        ball.setY(height - ball.getHeight() - 80); // sets the X position of the ball
-        ball.setX((width - ball.getWidth()) / 2); // sets the Y position of the ball
+    }
 
-
-
+    public void playTime()
+    {
         if (testTop == true) { // Repositions the ball above the blocks if testTop is true.
-            ball.setX(width / 2); // Sets X position of the ball.
+            ball.setX(sceneWidth / 2); // Sets X position of the ball.
             ball.setY(brickHeight / 2); // Sets Y position of the ball.
         }
 
@@ -130,6 +95,52 @@ public class BrickSlayer {
 
     }
 
+    public void numCoins()
+    {
+        numberOfCoins = new Label();
+        numberOfCoins.setTranslateY(25.5);
+        numberOfCoins.setTranslateX(870);
+        numberOfCoins.setText(String.valueOf(coins));
+        AnchorPane.setLeftAnchor(numberOfCoins,852.0);
+        AnchorPane.setRightAnchor(numberOfCoins,58.0);
+        numberOfCoins.setPrefWidth(90);
+        numberOfCoins.setPrefHeight(21);
+        numberOfCoins.setAlignment(Pos.CENTER_RIGHT);
+        root.getChildren().add(numberOfCoins);
+    }
+
+    public void paddleAndBall()
+    {
+        Main.paddleSkinsURL.add("sample/Images/Paddles/paddle_og2.png"); // if no skin is picked Default paddleSkin will be used
+        paddle = new Paddle(root, Main.paddleSkinsURL.get(0));
+        paddle.setY(sceneHeight - paddle.getHeight() - 10);
+        paddle.setX((sceneWidth / 2 - paddle.getHalfWidth()));
+
+        Main.ballSkinsURL.add("sample/Images/Balls/defaultBall.png"); // if no skin is picked, Default ballSkin will be used
+        ball = new Ball(root);
+        ball.setY(sceneHeight - ball.getHeight() - 80); // sets the X position of the ball
+        ball.setX((sceneWidth - ball.getWidth()) / 2); // sets the Y position of the ball
+
+
+    }
+
+    public void heartsAndCoins()
+    {
+        life1 = new ImageViewGameObj(root,"sample/Images/BrickSlayerHeart.png",30,30);
+        life1.setY(15);
+        life1.setX(15);
+        life2  = new ImageViewGameObj(root,"sample/Images/BrickSlayerHeart.png",30,30);
+        life2.setY(15);
+        life2.setX(45);
+        life3  = new ImageViewGameObj(root,"sample/Images/BrickSlayerHeart.png",30,30);
+        life3.setY(15);
+        life3.setX(75);
+
+        coin = new ImageViewGameObj(root,"sample/Images/Coin.png",38,35);
+        coin.setY(18);
+        coin.setX(930);
+    }
+
     public Ball updateBall(Ball ball) { // Method responsible for making the ball bounce off of the walls.
         ball = ball;
         ball.move(); // Calls the Ball class's move method to get the ball moving.
@@ -137,7 +148,7 @@ public class BrickSlayer {
         int dy = ball.getDy(); // Initializes dy and sets it equal to the Y velocity of the ball.
 
         // Makes the ball bounce off of the right boundary of the window.
-        if (ball.getX() > width - ball.getHalfWidth()) {
+        if (ball.getX() > sceneWidth - ball.getHalfWidth()) {
             dx = -dx;
             ball.setDx(dx); // Changes the X velocity of the ball.
         }
@@ -146,14 +157,14 @@ public class BrickSlayer {
             dx = -dx;
             ball.setDx(dx); // Changes the X velocity of the ball.
         }
-        // Makes the ball bounce off of the bottom boundary of the window if _bounceBottom is true.
+        // Makes the ball bounce off of the bottom boundary of the window if bounceBottom is true.
         if (bounceBottom == true) {
-            if (ball.getY() > height - ball.getHalfWidth()) {
+            if (ball.getY() > sceneHeight - ball.getHalfWidth()) {
                 dy = -dy;
                 ball.setDy(dy); // Changes the Y velocity of the ball.
             }
         }
-        // Makes the ball bounce off of the top boundary of the window if _bounceBottom is true.
+        // Makes the ball bounce off of the top boundary of the window if bounceBottom is true.
         if (ball.getY() < 0 + ball.getHalfHeight()) {
             dy = -dy;
             ball.setDy(dy); // Changes the X velocity of the ball.
@@ -195,7 +206,6 @@ public class BrickSlayer {
             // side we're on
             return BlockSide.BLOCK_LT_RT;
         } else {
-            // should never occur
             throw new IllegalStateException("whichPartHit failed!");
         }
     }
@@ -207,23 +217,23 @@ public class BrickSlayer {
     public void brickLayer() {
         bricks = new ArrayList<>(); // Makes an array list.
 
-        for (int i = brickStart; i < brickLimit; i++) { // For loop to create all 40 blocks and position them as desired.
-            brick = new Brick(root, "/sample/Images/Bricks/BlueBrick.png", brickWidth, brickHeight); // Creates the block.
-            bricks.add(brick); // Adds the block to the array list.
+        for (int i = brickStart; i < brickLimit; i++) { // For loop to create all 40 bricks and position them as desired.
+            brick = new Brick(root, "/sample/Images/Bricks/BlueBrick.png", brickWidth, brickHeight);
+            bricks.add(brick); // Adds the brick to the array list.
 
-            brick.setX(brickWidth * i + brickBorder); // // Sets X position of the block.
-            brick.setY(brickHeight * 2); // Sets Y position of the block.
+            brick.setX(brickWidth * i + brickBorder); // // Sets X position of the brick.
+            brick.setY(brickHeight * 2); // Sets Y position of the brick.
 
-            if (i >= secondRow && i <= endOfSecondRow) { // Creates the second row of blocks.
+            if (i >= secondRow && i <= endOfSecondRow) { // Creates the second row of bricks.
                 brick.setX(brickWidth * (i - secondH) + brickBorder);
                 brick.setY(brickHeight * rowSetter2);
-            } else if (i >= thirdRow && i <= endOfThirdRow) { // Creates the third row of blocks.
+            } else if (i >= thirdRow && i <= endOfThirdRow) { // Creates the third row of bricks.
                 brick.setX(brickWidth * (i - thirdH) + brickBorder);
                 brick.setY(brickHeight * rowSetter3);
-            } else if (i >= fourthRow && i <= endOfFourthRow) { // Creates the fourth row of blocks.
+            } else if (i >= fourthRow && i <= endOfFourthRow) { // Creates the fourth row of bricks.
                 brick.setX(brickWidth * (i - fourthH) + brickBorder);
                 brick.setY(brickHeight * rowSetter4);
-            } else if (i >= fifthRow && i <= endOfFifthRow) { // Creates the fifth row of blocks.
+            } else if (i >= fifthRow && i <= endOfFifthRow) { // Creates the fifth row of bricks.
                 brick.setX(brickWidth * (i - fifthH) + brickBorder);
                 brick.setY(brickHeight * rowSetter5);
 
@@ -239,8 +249,8 @@ public class BrickSlayer {
 
         if(lives >= 0){
             start();
-            ball.setX((width - ball.getWidth()) / 2);
-            ball.setY(height - ball.getHeight() - 80);
+            ball.setX((sceneWidth - ball.getWidth()) / 2);
+            ball.setY(sceneHeight - ball.getHeight() - 80);
             ball.setDx(0);
             ball.setDy(0);
             if(lives == 2)
@@ -271,7 +281,7 @@ public class BrickSlayer {
 
             gameDone();
         }
-    }//lifeLoss
+    }
 
     public void paddleCollision()
     {
@@ -280,6 +290,7 @@ public class BrickSlayer {
 
         if (ball.getBounds().intersects(paddle.getBounds())) { // Determines if the ball and paddle collide.
             ball.setDy(-dy); // Changes the ball's Y velocity to the opposite direction.
+
             // Changes X velocity of the ball if it hits the left half of the paddle.
             if (ball.getX() < (paddle.getX() + paddle.getHalfWidth())) {
                 double paddleDx = (paddle.getX() - ball.getX()) / velocityScaler;
@@ -298,14 +309,15 @@ public class BrickSlayer {
 
     public void brickCollision()
     {
-        for (Brick brick : bricks) { // For loop to constantly check for collisions between the ball and the bricks.
+        for (Brick brick : bricks) { // the loop to constantly checks for collisions between the ball and the bricks.
 
-            // Removes the block from scene that the ball strikes.
+            // Removes the brick from scene that the ball collides with.
             if (ball.getBounds().intersects(brick.getBounds())) {
                 score+=5;
                 root.getChildren().remove(brick.getImageView());
-                Main.effect("src/sample/Music/hit.wav");
-                coins++;
+
+                Main.effect("src/sample/Music/hit.wav"); // plays sound when brick is hit
+                coins++; // increments coins
                 numberOfCoins.setText(String.valueOf(coins));
                 hit = true;
 
@@ -340,8 +352,7 @@ public class BrickSlayer {
 
         }
 
-        if (bricks.size() == 1) { // Was supposed to end the game if all the blocks are removed from the array list.
-            System.out.println("Winner winner chicken dinner");
+        if (bricks.size() == 1) { // ends the game if all the blocks are removed from the array list.
             timeline.stop(); // Stops the timer.
 
             completed = new ImageViewGameObj(root, "sample/Images/Completed.png",464,56);
@@ -351,8 +362,8 @@ public class BrickSlayer {
 
         }
 
-        // Stops the game if the ball goes below the bottom.
-        if (ball.getY() > height) {
+        // if the ball goes below the bottom lifeLoss() is called and the player loses a life.
+        if (ball.getY() > sceneHeight) {
             lifeLoss();
         }
 
@@ -365,7 +376,7 @@ public class BrickSlayer {
     }
 
 
-    public void start()
+    public void start() // resets the ball to the start position.
     {
         root.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
