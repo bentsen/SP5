@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.event.EventHandler;
 
+import javax.sound.sampled.AudioSystem;
 import java.io.File;
 import java.io.IOException;
 
@@ -32,14 +33,20 @@ public class Controller {
     private Stage stage;
     private Parent root;
     private Scene scene;
-    private Parent parent;
     private String css = this.getClass().getResource("application.css").toExternalForm();
     private boolean play = true;
-    private boolean left = false, right = false;
+    private String image;
+    private String image2;
 
     @FXML
     private ImageView paddleImage;
+    @FXML
+    private Image myImage;
 
+    @FXML
+    private ImageView ballImage;
+    @FXML
+    private Image myBallImage;
 
     public void Scene2(javafx.event.ActionEvent actionEvent) throws IOException
     {
@@ -67,6 +74,7 @@ public class Controller {
         stage.show();
         scene.getStylesheets().add(css);
     }
+
 
     public void Scene4(javafx.event.ActionEvent actionEvent) throws IOException
     {
@@ -106,12 +114,63 @@ public class Controller {
 
     public void setPosition()
     {
+        if(Main.paddleSkinsURL.size() == 0)
+        {
+            image = "Images/Paddles/paddle_og2.png";
+            myImage = new Image(getClass().getResourceAsStream(image));
+            paddleImage.setImage(myImage);
+        }
+        else if(Main.paddleSkinsURL.size() > 0)
+        {
+            image = Main.paddleSkinsURL.get(0);
 
-        if(play == true) {
+            String original = Main.paddleSkinsURL.get(0);
+            String newString = original.replace("sample/","");
+
+            myImage = new Image(getClass().getResourceAsStream(newString));
+            paddleImage.setImage(myImage);
+        }
+        if(Main.ballSkinsURL.size() == 0)
+        {
+            image2 = "Images/Balls/defaultBall.png";
+            myBallImage = new Image(getClass().getResourceAsStream(image2));
+            ballImage.setImage(myBallImage);
+        }
+        else if(Main.ballSkinsURL.size() > 0)
+        {
+            image2 = Main.ballSkinsURL.get(0);
+
+            String original = Main.ballSkinsURL.get(0);
+            String newString = original.replace("sample/","");
+
+            myBallImage = new Image(getClass().getResourceAsStream(newString));
+            ballImage.setImage(myBallImage);
+        }
+
+        if(play) {
             TranslateTransition tt = new TranslateTransition(Duration.seconds(3), paddleImage);
             tt.setAutoReverse(true);
             tt.setByX(30);
             tt.setByX(770);
+            tt.setCycleCount(Animation.INDEFINITE);
+            tt.play();
+        }
+        if(play) {
+            TranslateTransition tt = new TranslateTransition(Duration.seconds(2), ballImage);
+            tt.setAutoReverse(false);
+            tt.setFromX(paddleImage.getX());
+            tt.setFromY(10);
+            tt.setToY(-600);
+            tt.setCycleCount(Animation.INDEFINITE);
+            tt.play();
+        }
+        if(play)
+        {
+            TranslateTransition tt = new TranslateTransition(Duration.seconds(3), ballImage);
+            tt.setAutoReverse(true);
+            tt.setFromX(paddleImage.getX());
+            tt.setByX(770);
+
             tt.setCycleCount(Animation.INDEFINITE);
             play = false;
             tt.play();
@@ -121,6 +180,8 @@ public class Controller {
 
     public void start2(ActionEvent actionEvent) throws Exception
     {
+        Main.clip.stop();
+        Main.music("src/sample/Music/GameMusic.wav",-10.0f);
         ((Node)actionEvent.getSource()).getScene().getWindow().hide();
         String css = this.getClass().getResource("application.css").toExternalForm();
         Stage gameStage = new Stage();
@@ -132,5 +193,6 @@ public class Controller {
         gameStage.getIcons().add(image);
         gameStage.setTitle("Brick Slayer");
         scene.getStylesheets().add(css);
+        gameStage.setResizable(false);
     }
 }

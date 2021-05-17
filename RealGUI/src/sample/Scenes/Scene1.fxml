@@ -9,6 +9,11 @@
 
 <AnchorPane onMouseEntered="#setPosition" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
+      <ImageView fx:id="ballImage" fitHeight="25.0" fitWidth="23.0" layoutX="91.0" layoutY="473.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Balls/defaultBall.png" />
+         </image>
+      </ImageView>
       <Button fx:id="exitButton" alignment="CENTER" layoutX="373.0" layoutY="404.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="25.0" prefWidth="254.0" text="Exit">
          <cursor>
             <Cursor fx:constant="HAND" />

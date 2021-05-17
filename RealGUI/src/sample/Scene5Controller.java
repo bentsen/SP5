@@ -20,15 +20,15 @@ import java.util.ResourceBundle;
 public class Scene5Controller implements Initializable {
 
 
-    String Image = "Images/Maps/Map1.png";
+   private String Image = "Images/Maps/Map1.png";
     @FXML
-    Label headerLabel;
+   private Label headerLabel;
     @FXML
-    ImageView myImageView;
+   private ImageView myImageView;
     @FXML
-    Image myImage = new Image(getClass().getResourceAsStream(Image));
+   private Image myImage = new Image(getClass().getResourceAsStream(Image));
     @FXML
-    ImageView imageLocked;
+   private ImageView imageLocked;
 
 
     private int count = 1;

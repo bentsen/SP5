@@ -19,7 +19,6 @@ public class Scene4Controller {
 
     private Stage stage;
     private Scene scene;
-    private Parent parent;
     private String css = this.getClass().getResource("application.css").toExternalForm();
     private String Image = "Images/Shop/Paddle/PaddleShop1.png";
     private int count = 1;
@@ -28,13 +27,13 @@ public class Scene4Controller {
     private boolean paddle = true;
     private boolean ball = false;
     @FXML
-    ImageView skinsImage;
+   private ImageView skinsImage;
     @FXML
-    Image myImage = new Image(getClass().getResourceAsStream(Image));
+   private Image myImage = new Image(getClass().getResourceAsStream(Image));
     @FXML
-    Button buy;
+   private Button buy;
     @FXML
-    Button equip;
+   private Button equip;
 
 
     public void switchToScene1(MouseEvent mouseEvent) throws IOException
@@ -225,6 +224,7 @@ public class Scene4Controller {
                 break;
 
          }
+            Main.paddleSkinsURL.removeAll(Main.paddleSkinsURL);
             Main.paddleSkinsURL.add(paddleURL);
         }
 
@@ -256,6 +256,7 @@ public class Scene4Controller {
                     break;
 
             }
+            Main.ballSkinsURL.removeAll(Main.ballSkinsURL);
             Main.ballSkinsURL.add(ballURL);
         }
 

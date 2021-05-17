@@ -5,12 +5,22 @@ public class PaddleSkin
     String name;
     String url;
     boolean owned;
+    int price;
 
-    public PaddleSkin(String name, String url, boolean owned)
+    public PaddleSkin(String name, String url, boolean owned, int price)
     {
+        this.price = price;
         this.name = name;
         this.url = url;
         this.owned = owned;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public String getName() {

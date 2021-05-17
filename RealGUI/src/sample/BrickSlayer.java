@@ -3,11 +3,19 @@ package sample;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
+import javafx.scene.Cursor;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.FileWriter;
@@ -18,6 +26,9 @@ import java.util.Scanner;
 import static sample.Constants.*;
 
 public class BrickSlayer {
+    private Stage stage;
+    private Scene scene;
+    private String css = this.getClass().getResource("application.css").toExternalForm();
     private Pane root;
     private ArrayList<Brick> bricks;
     private Timeline timeline;
@@ -27,7 +38,12 @@ public class BrickSlayer {
     private ImageViewGameObj life1;
     private ImageViewGameObj life2;
     private ImageViewGameObj life3;
+    private ImageViewGameObj gameOver;
+    private ImageViewGameObj completed;
+    private ImageViewGameObj coin;
+    private Label numberOfCoins;
     private int score = 0;
+    private int coins = 0;
     private boolean testTop = false;
     private double delayMs = 10; // Delay for the timeline.
     private double mx; // Variable to store the mouse's X position.
@@ -35,7 +51,6 @@ public class BrickSlayer {
     private int lives = 3;
     boolean hit = false; // Initializes a boolean to use for ball and block collisions.
     int dx, dy; // Initializes dx and dy that will be used for changing the velocity of the ball.
-
 
 
 
@@ -57,6 +72,19 @@ public class BrickSlayer {
         life3  = new ImageViewGameObj(root,"sample/Images/BrickSlayerHeart.png",30,30);
         life3.setY(15);
         life3.setX(75);
+
+        coin = new ImageViewGameObj(root,"sample/Images/Coin.png",38,35);
+        coin.setY(18);
+        coin.setX(930);
+
+        numberOfCoins = new Label();
+        numberOfCoins.setTranslateY(26);
+        numberOfCoins.setTranslateX(913);
+        numberOfCoins.setText(String.valueOf(coins));
+        root.getChildren().add(numberOfCoins);
+
+
+
 
         start();
 
@@ -199,7 +227,7 @@ public class BrickSlayer {
 
     }
 
-    public void lifeLoss() {
+    public void lifeLoss()  {
         lives -= 1;
 
         if(lives >= 0){
@@ -230,10 +258,11 @@ public class BrickSlayer {
         else {
             timeline.stop(); // Stops the timeline.
             System.out.println("GameOver");
-            Label gameOver = new Label("GameOver");
-            gameOver.setTranslateX(450);
-            gameOver.setTranslateY(300);
-            root.getChildren().add(gameOver);
+            gameOver = new ImageViewGameObj(root, "sample/Images/Game_over.png",300,80);
+            gameOver.setX(335);
+            gameOver.setY(220);
+
+            gameDone();
         }
     }//lifeLoss
 
@@ -268,6 +297,9 @@ public class BrickSlayer {
             if (ball.getBounds().intersects(brick.getBounds())) {
                 score+=5;
                 root.getChildren().remove(brick.getImageView());
+                Main.effect("src/sample/Music/hit.wav");
+                coins++;
+                numberOfCoins.setText(String.valueOf(coins));
                 hit = true;
 
             }
@@ -304,6 +336,11 @@ public class BrickSlayer {
         if (bricks.size() == 1) { // Was supposed to end the game if all the blocks are removed from the array list.
             System.out.println("Winner winner chicken dinner");
             timeline.stop(); // Stops the timer.
+
+            completed = new ImageViewGameObj(root, "sample/Images/Completed.png",300,50);
+            completed.setX(335);
+            completed.setY(230);
+            gameDone();
 
         }
 
@@ -373,5 +410,35 @@ public class BrickSlayer {
         System.out.print("User Input: ");
         Scanner scan = new Scanner(System.in);
         return scan.nextInt();
+    }
+
+    public void gameDone()
+    {
+        Button button = new Button();
+        button.setText("Back to menu");
+        button.setTranslateX(420);
+        button.setTranslateY(330);
+        button.setCursor(Cursor.HAND);
+        root.getChildren().add(button);
+
+        button.setOnAction(new EventHandler<ActionEvent>()  {
+            @Override
+            public void handle(ActionEvent mouseEvent)  {
+                try {
+                    Main.clip.stop();
+                    Main.music("src/sample/Music/Music.wav",-10.0f);
+                    Parent root = FXMLLoader.load(getClass().getResource("Scenes/Scene1.fxml"));
+                    stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+                    scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                    scene.getStylesheets().add(css);
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }

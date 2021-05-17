@@ -14,7 +14,6 @@ public class Scene6Controller {
 
     private Stage stage;
     private Scene scene;
-    private Parent parent;
     private String css = this.getClass().getResource("application.css").toExternalForm();
     private boolean play = true;
 
