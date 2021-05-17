@@ -5,22 +5,12 @@ public class BallSkin
     String name;
     String url;
     boolean owned;
-    int price;
 
-    public BallSkin(String name, String url, boolean owned, int price)
+    public BallSkin(String name, String url, boolean owned)
     {
-        this.price = price;
         this.name = name;
         this.url = url;
         this.owned = owned;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
     }
 
     public String getName() {

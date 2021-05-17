@@ -29,8 +29,6 @@ public class Scene5Controller implements Initializable {
    private Image myImage = new Image(getClass().getResourceAsStream(Image));
     @FXML
    private ImageView imageLocked;
-    @FXML
-    Label currencyLabel;
 
 
     private int count = 1;

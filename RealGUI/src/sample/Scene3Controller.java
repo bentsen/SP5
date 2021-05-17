@@ -19,8 +19,6 @@ public class Scene3Controller {
     private Parent parent;
     private String css = this.getClass().getResource("application.css").toExternalForm();
     private boolean play = true;
-    @FXML
-    Label currencyLabel;
 
 
     public void switchToScene1(MouseEvent mouseEvent) throws IOException
