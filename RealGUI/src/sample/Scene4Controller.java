@@ -251,9 +251,9 @@ public class Scene4Controller {
     {
         arrayCount = 0;
         count = 1;
-        paddle = true;
-        ball = false;
-        Image = "Images/Shop/Paddle/PaddleShop1.png";
+        paddle = p;
+        ball = b;
+        Image = url;
         myImage = new Image(getClass().getResourceAsStream(Image));
         skinsImage.setImage(myImage);
     }

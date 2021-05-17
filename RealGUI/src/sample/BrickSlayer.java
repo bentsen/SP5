@@ -444,6 +444,7 @@ public class BrickSlayer {
             public void handle(ActionEvent mouseEvent)  {
                 try {
                     int temp = Main.players.get(0).getDeshCoins() + coins; //add the coins gained to players currency
+                    temp = temp - Main.players.get(0).getDeshCoins();
                     Main.players.get(0).setDeshCoins(temp);
 
                     Main.clip.stop();
