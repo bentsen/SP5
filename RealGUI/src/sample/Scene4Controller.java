@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -34,6 +35,8 @@ public class Scene4Controller {
    private Button buy;
     @FXML
    private Button equip;
+    @FXML
+    Label currencyLabel;
 
 
     public void switchToScene1(MouseEvent mouseEvent) throws IOException
@@ -55,21 +58,13 @@ public class Scene4Controller {
                 arrayCount++;
                 if(Main.paddleSkins.get(arrayCount).isOwned())
                 {
-                    equip.setVisible(true);
-                    buy.setVisible(false);
                     count++;
-                    Image = "Images/Shop/Paddle/PaddleShop" + count + "Owned.png";
-                    myImage = new Image(getClass().getResourceAsStream(Image));
-                    skinsImage.setImage(myImage);
+                    ownerShip(false,true,"Owned.png","Images/Shop/Paddle/PaddleShop");
                 }
                 else if(!Main.paddleSkins.get(arrayCount).isOwned())
                 {
-                    equip.setVisible(false);
-                    buy.setVisible(true);
                     count++;
-                    Image = "Images/Shop/Paddle/PaddleShop" + count + ".png";
-                    myImage = new Image(getClass().getResourceAsStream(Image));
-                    skinsImage.setImage(myImage);
+                    ownerShip(true,false,".png","Images/Shop/Paddle/PaddleShop");
                 }
             }
         }
@@ -80,21 +75,13 @@ public class Scene4Controller {
                 arrayCount++;
                 if(Main.ballSkins.get(arrayCount).isOwned())
                 {
-                    equip.setVisible(true);
-                    buy.setVisible(false);
                     count++;
-                    Image = "Images/Shop/Ball/BallShop" + count + "Owned.png";
-                    myImage = new Image(getClass().getResourceAsStream(Image));
-                    skinsImage.setImage(myImage);
+                    ownerShip(false,true,"Owned.png","Images/Shop/Ball/BallShop");
                 }
                 else if(!Main.ballSkins.get(arrayCount).isOwned())
                 {
-                    equip.setVisible(false);
-                    buy.setVisible(true);
                     count++;
-                    Image = "Images/Shop/Ball/BallShop" + count + ".png";
-                    myImage = new Image(getClass().getResourceAsStream(Image));
-                    skinsImage.setImage(myImage);
+                    ownerShip(true,false,".png","Images/Shop/Ball/BallShop");
                 }
             }
         }
@@ -110,21 +97,13 @@ public class Scene4Controller {
 
                 if(Main.paddleSkins.get(arrayCount).isOwned())
                 {
-                    equip.setVisible(true);
-                    buy.setVisible(false);
                     count--;
-                    Image = "Images/Shop/Paddle/PaddleShop" + count + "Owned.png";
-                    myImage = new Image(getClass().getResourceAsStream(Image));
-                    skinsImage.setImage(myImage);
+                    ownerShip(false,true,"Owned.png","Images/Shop/Paddle/PaddleShop");
                 }
                 else if(!Main.paddleSkins.get(arrayCount).isOwned())
                 {
-                    equip.setVisible(false);
-                    buy.setVisible(true);
                     count--;
-                    Image = "Images/Shop/Paddle/PaddleShop" + count + ".png";
-                    myImage = new Image(getClass().getResourceAsStream(Image));
-                    skinsImage.setImage(myImage);
+                    ownerShip(true,false,".png","Images/Shop/Paddle/PaddleShop");
                 }
             }
         }
@@ -135,21 +114,13 @@ public class Scene4Controller {
                 arrayCount--;
                 if(Main.ballSkins.get(arrayCount).isOwned())
                 {
-                    equip.setVisible(true);
-                    buy.setVisible(false);
                     count--;
-                    Image = "Images/Shop/Ball/BallShop" + count + "Owned.png";
-                    myImage = new Image(getClass().getResourceAsStream(Image));
-                    skinsImage.setImage(myImage);
+                    ownerShip(false,true,"Owned.png","Images/Shop/Ball/BallShop");
                 }
                 else if(!Main.ballSkins.get(arrayCount).isOwned())
                 {
-                    equip.setVisible(false);
-                    buy.setVisible(true);
                     count--;
-                    Image = "Images/Shop/Ball/BallShop" + count + ".png";
-                    myImage = new Image(getClass().getResourceAsStream(Image));
-                    skinsImage.setImage(myImage);
+                    ownerShip(true,false,".png","Images/Shop/Ball/BallShop");
                 }
             }
         }
@@ -158,24 +129,13 @@ public class Scene4Controller {
 
     public void PaddleClick(ActionEvent actionEvent)
     {
-        arrayCount = 0;
-        count = 1;
-        paddle = true;
-        ball = false;
-        Image = "Images/Shop/Paddle/PaddleShop1.png";
-        myImage = new Image(getClass().getResourceAsStream(Image));
-        skinsImage.setImage(myImage);
+
+        paddleOrBall(false,true,"Images/Shop/Paddle/PaddleShop1.png");
     }
 
     public void BallClick(ActionEvent actionEvent)
     {
-        arrayCount = 0;
-        count = 1;
-        ball = true;
-        paddle = false;
-        Image = "Images/Shop/Ball/BallShop1.png";
-        myImage = new Image(getClass().getResourceAsStream(Image));
-        skinsImage.setImage(myImage);
+        paddleOrBall(true,false,"Images/Shop/Ball/BallShop1.png");
     }
 
 
@@ -183,14 +143,30 @@ public class Scene4Controller {
     {
         if(paddle == true && ball == false)
         {
-            Player player = new Player("Mikkel",10,50); //should be a player from arraylist that comes from sql
-            //her skal der være statement der skal checke om player har nok deshCoins til at købe Paddleskin der koster desh coins
+            if(Main.players.get(0).getDeshCoins() >= Main.paddleSkins.get(arrayCount).getPrice())
+            {
+                Main.paddleSkins.get(arrayCount).setOwned(true);
+                int temp = Main.players.get(0).getDeshCoins() - Main.paddleSkins.get(arrayCount).getPrice();
+                Main.players.get(0).setDeshCoins(temp);
+            }
+            else
+            {
+                System.out.println("not enough DeshCoins"); //should be a label
+            }
         }
 
         else if(paddle == false && ball == true)
         {
-            Player player = new Player("Mikkel",10,50); //should be a player from arraylist that comes from sql
-            //her skal der være statement der skal checke om player har nok deshCoins til at købe BallSkin der koster desh coins
+            if(Main.players.get(0).getDeshCoins() >= Main.ballSkins.get(arrayCount).getPrice())
+            {
+                Main.ballSkins.get(arrayCount).setOwned(true);
+                int temp = Main.players.get(0).getDeshCoins() - Main.ballSkins.get(arrayCount).getPrice();
+                Main.players.get(0).setDeshCoins(temp);
+            }
+            else
+            {
+                System.out.println("not enough DeshCoins"); //should be a label
+            }
         }
 
     }
@@ -260,6 +236,26 @@ public class Scene4Controller {
             Main.ballSkinsURL.add(ballURL);
         }
 
+    }
+
+    public void ownerShip(boolean b, boolean e, String ownedOrNot, String url)
+    {
+        equip.setVisible(e);
+        buy.setVisible(b);
+        Image = url + count + ownedOrNot;
+        myImage = new Image(getClass().getResourceAsStream(Image));
+        skinsImage.setImage(myImage);
+    }
+
+    public void paddleOrBall(boolean b, boolean p, String url)
+    {
+        arrayCount = 0;
+        count = 1;
+        paddle = true;
+        ball = false;
+        Image = "Images/Shop/Paddle/PaddleShop1.png";
+        myImage = new Image(getClass().getResourceAsStream(Image));
+        skinsImage.setImage(myImage);
     }
 
 }

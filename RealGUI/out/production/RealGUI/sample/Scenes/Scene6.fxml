@@ -18,7 +18,6 @@
             <Image url="@../Images/Coin.png" />
          </image>
       </ImageView>
-      <Label fx:id="currencyLabel" layoutX="910.0" layoutY="25.0" text="0" />
       <ImageView fitHeight="29.0" fitWidth="83.0" layoutX="305.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/Bricks/BlueBrick.png" />
@@ -87,5 +86,6 @@
       <Label layoutX="394.0" layoutY="304.0" text="-2 Hits" />
       <Label layoutX="394.0" layoutY="354.0" text="-2 Hits" />
       <Label layoutX="394.0" layoutY="404.0" text="-2 Hits" />
+      <Label fx:id="currencyLabel" alignment="CENTER_RIGHT" layoutX="852.0" layoutY="25.5" prefHeight="21.0" prefWidth="90.0" text="0" AnchorPane.leftAnchor="852.0" AnchorPane.rightAnchor="58.0" />
    </children>
 </AnchorPane>

@@ -5,6 +5,8 @@ import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -23,11 +25,13 @@ import javafx.event.EventHandler;
 import javax.sound.sampled.AudioSystem;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import static sample.Constants.height;
 import static sample.Constants.width;
 
-public class Controller {
+public class Controller implements Initializable {
 
 
     private Stage stage;
@@ -42,11 +46,17 @@ public class Controller {
     private ImageView paddleImage;
     @FXML
     private Image myImage;
-
     @FXML
     private ImageView ballImage;
     @FXML
     private Image myBallImage;
+    @FXML
+    private Label currencyLabel;
+
+    public void initialize(URL location, ResourceBundle resourceBundle)
+    {
+        currencyLabel.setText(String.valueOf(Main.players.get(0).getDeshCoins()));
+    }
 
     public void Scene2(javafx.event.ActionEvent actionEvent) throws IOException
     {
@@ -54,20 +64,22 @@ public class Controller {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Scenes/Scene2.fxml"));
         root = loader.load();
         Scene2Controller scene2Controller = loader.getController();
-
+        scene2Controller.currencyLabel.setText(String.valueOf(Main.players.get(0).getDeshCoins()));
         stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
 
         scene.getStylesheets().add(css);
-
     }
 
 
     public void Scene3(javafx.event.ActionEvent actionEvent) throws IOException
     {
-        Parent root = FXMLLoader.load(getClass().getResource("Scenes/Scene3.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Scenes/Scene3.fxml"));
+        root = loader.load();
+        Scene3Controller scene3Controller = loader.getController();
+        scene3Controller.currencyLabel.setText(String.valueOf(Main.players.get(0).getDeshCoins()));
         stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -78,7 +90,10 @@ public class Controller {
 
     public void Scene4(javafx.event.ActionEvent actionEvent) throws IOException
     {
-        Parent root = FXMLLoader.load(getClass().getResource("Scenes/Scene4.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Scenes/Scene4.fxml"));
+        root = loader.load();
+        Scene4Controller scene4Controller = loader.getController();
+        scene4Controller.currencyLabel.setText(String.valueOf(Main.players.get(0).getDeshCoins()));
         stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -88,7 +103,10 @@ public class Controller {
 
     public void Scene5(javafx.event.ActionEvent actionEvent) throws IOException
     {
-        Parent root = FXMLLoader.load(getClass().getResource("Scenes/Scene5.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Scenes/Scene5.fxml"));
+        root = loader.load();
+        Scene5Controller scene5Controller = loader.getController();
+        scene5Controller.currencyLabel.setText(String.valueOf(Main.players.get(0).getDeshCoins()));
         stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -98,7 +116,10 @@ public class Controller {
 
     public void Scene6(MouseEvent mouseEvent) throws IOException
     {
-        Parent root = FXMLLoader.load(getClass().getResource("Scenes/Scene6.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Scenes/Scene6.fxml"));
+        root = loader.load();
+        Scene6Controller scene6Controller = loader.getController();
+        scene6Controller.currencyLabel.setText(String.valueOf(Main.players.get(0).getDeshCoins()));
         stage = (Stage) ((Node)mouseEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
