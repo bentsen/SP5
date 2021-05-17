@@ -7,7 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
-import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -15,7 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -45,7 +43,7 @@ public class BrickSlayer {
     private ImageViewGameObj coin;
     private Label numberOfCoins;
     private int score = 0;
-    private int coins = Main.players.get(0).getDeshCoins();
+    private int coins = 0;
     private boolean testTop = false;
     private double delayMs = 10; // Delay for the timeline.
     private double mx; // Variable to store the mouse's X position.
@@ -80,14 +78,9 @@ public class BrickSlayer {
         coin.setX(930);
 
         numberOfCoins = new Label();
-        numberOfCoins.setTranslateY(25.5);
-        numberOfCoins.setTranslateX(870);
+        numberOfCoins.setTranslateY(26);
+        numberOfCoins.setTranslateX(913);
         numberOfCoins.setText(String.valueOf(coins));
-        AnchorPane.setLeftAnchor(numberOfCoins,852.0);
-        AnchorPane.setRightAnchor(numberOfCoins,58.0);
-        numberOfCoins.setPrefWidth(90);
-        numberOfCoins.setPrefHeight(21);
-        numberOfCoins.setAlignment(Pos.CENTER_RIGHT);
         root.getChildren().add(numberOfCoins);
 
 
@@ -265,8 +258,8 @@ public class BrickSlayer {
         else {
             timeline.stop(); // Stops the timeline.
             System.out.println("GameOver");
-            gameOver = new ImageViewGameObj(root, "sample/Images/Game_over.png",414,60);
-            gameOver.setX(280);
+            gameOver = new ImageViewGameObj(root, "sample/Images/Game_over.png",300,80);
+            gameOver.setX(335);
             gameOver.setY(220);
 
             gameDone();
@@ -344,8 +337,8 @@ public class BrickSlayer {
             System.out.println("Winner winner chicken dinner");
             timeline.stop(); // Stops the timer.
 
-            completed = new ImageViewGameObj(root, "sample/Images/Completed.png",464,56);
-            completed.setX(280);
+            completed = new ImageViewGameObj(root, "sample/Images/Completed.png",300,50);
+            completed.setX(335);
             completed.setY(230);
             gameDone();
 
@@ -432,9 +425,6 @@ public class BrickSlayer {
             @Override
             public void handle(ActionEvent mouseEvent)  {
                 try {
-                    int temp = Main.players.get(0).getDeshCoins() + coins; //add the coins gained to players currency
-                    Main.players.get(0).setDeshCoins(temp);
-
                     Main.clip.stop();
                     Main.music("src/sample/Music/Music.wav",-10.0f);
                     Parent root = FXMLLoader.load(getClass().getResource("Scenes/Scene1.fxml"));

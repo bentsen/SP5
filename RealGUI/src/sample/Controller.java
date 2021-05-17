@@ -10,26 +10,19 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import javafx.event.EventHandler;
 
-import javax.sound.sampled.AudioSystem;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static sample.Constants.height;
-import static sample.Constants.width;
+import static sample.Constants.sceneHeight;
+import static sample.Constants.sceneWidth;
 
 public class Controller implements Initializable {
 
@@ -207,7 +200,7 @@ public class Controller implements Initializable {
         String css = this.getClass().getResource("application.css").toExternalForm();
         Stage gameStage = new Stage();
         BrickSlayer brickSlayer = new BrickSlayer();
-        Scene scene = new Scene(brickSlayer.getRoot(), width, height);
+        Scene scene = new Scene(brickSlayer.getRoot(), sceneWidth, sceneHeight);
         gameStage.setScene(scene);
         gameStage.show();
         Image image = new Image(new File("src/sample/Images/BrickIcon.png").toURI().toString());
