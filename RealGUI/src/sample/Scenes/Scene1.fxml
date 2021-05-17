@@ -58,7 +58,7 @@
             <Image url="@../Images/Coin.png" />
          </image>
       </ImageView>
-      <Label fx:id="currencyLabel" layoutX="910.0" layoutY="25.0" text="0" />
+      <Label fx:id="currencyLabel" alignment="CENTER_RIGHT" layoutX="852.0" layoutY="25.5" prefHeight="21.0" prefWidth="90.0" text="0" AnchorPane.leftAnchor="852.0" AnchorPane.rightAnchor="58.0" />
       <ImageView fitHeight="56.0" fitWidth="381.0" layoutX="310.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/BrickSlayerLabel.png" />

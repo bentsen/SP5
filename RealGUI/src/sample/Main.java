@@ -36,6 +36,8 @@ public class Main extends Application
     public static ArrayList<String> ballSkinsURL = new ArrayList<>();
     public static ArrayList<PaddleSkin> paddleSkins = new ArrayList<>();
     public static ArrayList<BallSkin> ballSkins = new ArrayList<>();
+    public static ArrayList<Player> players = new ArrayList<>();
+
     public static Clip clip;
     public static Clip effectClip;
 
@@ -56,13 +58,13 @@ public class Main extends Application
         paddleSkins.add(paddleSkin1);
 
         //shold be loaded from database
-        BallSkin ballSkin = new BallSkin("Default","sample/Images/Balls/defaultBall.png",true);
-        BallSkin ballSkin6 = new BallSkin("Default","sample/Images/Balls/ball steve.png",true);
-        BallSkin ballSkin1 = new BallSkin("Yoda","sample/Images/Balls/ball yoda.png",false);
-        BallSkin ballSkin2 = new BallSkin("Pokeball","sample/Images/Balls/ball pokeball.png",false);
-        BallSkin ballSkin3 = new BallSkin("Pacman","sample/Images/Balls/ball pacman.png",true);
-        BallSkin ballSkin4 = new BallSkin("Imposter","sample/Images/Balls/ball imposter.png",false);
-        BallSkin ballSkin5 = new BallSkin("Gilli","sample/Images/Balls/ballgilli.png",false);
+        BallSkin ballSkin = new BallSkin("Default","sample/Images/Balls/defaultBall.png",true,0);
+        BallSkin ballSkin6 = new BallSkin("Steve","sample/Images/Balls/ball steve.png",true,500);
+        BallSkin ballSkin1 = new BallSkin("Yoda","sample/Images/Balls/ball yoda.png",false,500);
+        BallSkin ballSkin2 = new BallSkin("Pokeball","sample/Images/Balls/ball pokeball.png",false,750);
+        BallSkin ballSkin3 = new BallSkin("Pacman","sample/Images/Balls/ball pacman.png",true,750);
+        BallSkin ballSkin4 = new BallSkin("Imposter","sample/Images/Balls/ball imposter.png",false,750);
+        BallSkin ballSkin5 = new BallSkin("Gilli","sample/Images/Balls/ballgilli.png",false,1000);
         ballSkins.add(ballSkin);
         ballSkins.add(ballSkin6);
         ballSkins.add(ballSkin1);
@@ -70,6 +72,10 @@ public class Main extends Application
         ballSkins.add(ballSkin3);
         ballSkins.add(ballSkin4);
         ballSkins.add(ballSkin5);
+
+        Player player = new Player("Mikkel", 20, 1000);
+        players.add(player);
+
         launch(args);
     }
 

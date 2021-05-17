@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -31,6 +32,8 @@ public class Scene2Controller implements Initializable {
     private String css = this.getClass().getResource("application.css").toExternalForm();
     @FXML
     ImageView paddleImage;
+    @FXML
+    Label currencyLabel;
 
     //This method is called upon fxml load
     public void initialize(URL location, ResourceBundle resourceBundle)
