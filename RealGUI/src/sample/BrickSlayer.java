@@ -79,6 +79,11 @@ public class BrickSlayer {
                     root.setOnMouseMoved((event) -> { // Tracks the mouse's movements.
                         mx = event.getX() - paddle.getHalfWidth(); // Gets the mouse's X position.
                         paddle.setX(mx); // Sets the center of the paddle to the mouse's X position.
+
+                        // limits the paddles movement to within the scene
+                        int paddleLimit = sceneWidth-145;
+                        if (paddle.getX() > paddleLimit) paddle.setX(sceneWidth-145) ;
+                        if (paddle.getX() <0) paddle.setX(0);
                     });
 
                     updateBall(ball); // Calls the updateBall method.
@@ -311,19 +316,30 @@ public class BrickSlayer {
             ball.setDy(-dy); // Changes the ball's Y velocity to the opposite direction.
 
             // Changes X velocity of the ball if it hits the left half of the paddle.
-            if (ball.getX() < (paddle.getX() + paddle.getHalfWidth()))
+            if (ball.getX() < (paddle.getX() + (paddle.getWidth()/3)))
             {
                 double paddleDx = (paddle.getX() - ball.getX()) / velocityScaler;
                 ball.setDx((int) paddleDx);
+                System.out.println("venstre");
             }
-            // Changes X velocity of the ball if it hits the right half of the paddle.
-            else if (ball.getX() > (paddle.getX() + paddle.getHalfWidth()))
+
+            else if(ball.getX() < (paddle.getX() + (paddle.getWidth()/3)+60) && ball.getX() > (paddle.getX() + (paddle.getWidth()/3)))
             {
-                if (ball.getDx() < 0)
-                {
-                    ball.setDx(-dx);
-                }
-                ball.setDx(dx);
+                ball.setDx(ball.getDx());
+                System.out.println("midt");
+            }
+
+            // Changes X velocity of the ball if it hits the right half of the paddle.
+            else if (ball.getX() > (paddle.getX() + (paddle.getWidth()/3)+60))
+            {
+               double paddleDx = (ball.getX() - paddle.getX()) / 20;
+               ball.setDx((int) paddleDx);
+               System.out.println("højre");
+//                if (ball.getDx() < 0)
+//                {
+//                    ball.setDx(-dx);
+//                }
+//                ball.setDx(dx);
             }
         }
 
@@ -340,7 +356,16 @@ public class BrickSlayer {
                 score+=5;
                 root.getChildren().remove(brick.getImageView());
 
-                Main.effect("src/sample/Music/hit.wav"); // plays sound when brick is hit
+                 // plays sound when brick is hit
+
+                if(Main.getEquippedBall().equals("sample/Images/Balls/ballgilli.png"))
+                {
+                    Main.effect("src/sample/Music/orale_shot.wav"); //easter egg
+                }
+                else
+                {
+                    Main.effect("src/sample/Music/hit.wav");
+                }
                 coins++; // increments coins
                 numberOfCoins.setText(String.valueOf(coins));
                 hit = true;

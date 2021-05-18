@@ -295,8 +295,8 @@ public class Scene4Controller {
     {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Currency");
-        alert.setHeaderText("Not enough DeshCoins");
-        alert.setContentText("play to earn more DeshCoins");
+        alert.setHeaderText("Not enough Ruaffu Coins");
+        alert.setContentText("play to earn more Ruaffu Coins");
         stage = (Stage) alert.getDialogPane().getScene().getWindow();
         stage.getIcons().add(new Image("sample/Images/BrickIcon.png"));
         DialogPane myDialog = alert.getDialogPane();

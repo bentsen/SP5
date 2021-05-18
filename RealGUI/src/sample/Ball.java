@@ -16,10 +16,7 @@ public class Ball extends ImageViewAssets {
 
     }
 
-
-    /**
-     * Moves the ball according to it's velocity without any bouncing.
-     */
+      //Moves the ball.
     public void move() {
         this.setY(this.getY() + this.getDy());
         this.setX(this.getX() + this.getDx());
@@ -27,9 +24,16 @@ public class Ball extends ImageViewAssets {
 
     public static int randInRange(int min, int max) {
         Random r = new Random();
-        return r.ints(min, (max + 1)).findFirst().getAsInt()+1;
-    }
+        int rand;
+        rand = r.ints(min, (max + 1)).findFirst().getAsInt();
+        if (rand == 0)
+        {
+            return rand+1;
+        }else {
+            return rand;
+        }
 
+    }
 
     // returns the centre x point of the ball
     public double getX()

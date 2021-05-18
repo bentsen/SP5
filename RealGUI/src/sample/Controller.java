@@ -56,7 +56,7 @@ public class Controller implements Initializable {
 
     public void initialize(URL location, ResourceBundle resourceBundle)
     {
-        currencyLabel.setText(String.valueOf(Main.players.get(0).getDeshCoins()));
+        currencyLabel.setText(String.valueOf(Main.players.get(0).getDeshCoins())); //set coin at startup of controller
     }
 
 
@@ -170,7 +170,13 @@ public class Controller implements Initializable {
     public void start2(ActionEvent actionEvent) throws Exception
     {
         Main.clip.stop();
-        Main.music("src/sample/Music/GameMusic.wav",-10.0f);
+
+        if(Main.getEquipped().equals("sample/Images/Paddles/paddlelightsaber.png")) {
+            Main.music("src/sample/Music/SWMusic.wav", -10.0f); //easter egg
+        }
+        else {
+            Main.music("src/sample/Music/GameMusic.wav", -10.0f);
+        }
         ((Node)actionEvent.getSource()).getScene().getWindow().hide();
         String css = this.getClass().getResource("application.css").toExternalForm();
         Stage gameStage = new Stage();
