@@ -9,14 +9,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
-public class ImageViewGameObj {
+public class ImageViewAssets {
     private ImageView imageView;
     private double speed = 10;
     private String url;
 
 
 
-    public ImageViewGameObj(Pane root, String url)
+    public ImageViewAssets(Pane root, String url)
     {
         imageView = new ImageView(url);
         imageView.setCache(true);
@@ -24,7 +24,7 @@ public class ImageViewGameObj {
     }
 
 
-    public ImageViewGameObj(Pane root, String url, double width, double height)
+    public ImageViewAssets(Pane root, String url, double width, double height)
     {
         imageView = new ImageView(new Image(url, width, height,false,true));
         imageView.setCache(true);

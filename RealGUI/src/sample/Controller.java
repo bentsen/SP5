@@ -59,21 +59,6 @@ public class Controller implements Initializable {
         currencyLabel.setText(String.valueOf(Main.players.get(0).getDeshCoins()));
     }
 
-    public void Scene2(javafx.event.ActionEvent actionEvent) throws IOException
-    {
-        //LOAD SCENE2
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Scenes/Scene2.fxml"));
-        root = loader.load();
-        Scene2Controller scene2Controller = loader.getController();
-        scene2Controller.currencyLabel.setText(String.valueOf(Main.players.get(0).getDeshCoins()));
-        stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-        scene.getStylesheets().add(css);
-
-    }
-
 
     public void Scene3(javafx.event.ActionEvent actionEvent) throws IOException
     {
@@ -111,7 +96,6 @@ public class Controller implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Scenes/Scene6.fxml"));
         root = loader.load();
         Scene6Controller scene6Controller = loader.getController();
-        scene6Controller.currencyLabel.setText(String.valueOf(Main.players.get(0).getDeshCoins()));
         stage = (Stage) ((Node)mouseEvent.getSource()).getScene().getWindow();
         changeScene();
     }

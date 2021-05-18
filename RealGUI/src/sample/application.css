@@ -17,14 +17,6 @@
     -fx-alignment: center;
 }
 
-#numberOfCoins
-{
-    -fx-font-size: 20;
-    -fx-font-family: "lucida Console";
-    -fx-text-fill: "white";
-    -fx-alignment: right;
-}
-
 #currencyLabel
 {
     -fx-font-size: 20;

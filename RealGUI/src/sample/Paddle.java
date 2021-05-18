@@ -3,7 +3,7 @@ package sample;
 import javafx.scene.layout.Pane;
 
 
-public class Paddle extends ImageViewGameObj{
+public class Paddle extends ImageViewAssets {
 
     public Paddle(Pane root, String url)
     {

@@ -36,12 +36,12 @@ public class BrickSlayer {
     private Paddle paddle;
     private Ball ball;
     private Brick brick;
-    private ImageViewGameObj life1;
-    private ImageViewGameObj life2;
-    private ImageViewGameObj life3;
-    private ImageViewGameObj gameOver;
-    private ImageViewGameObj completed;
-    private ImageViewGameObj coin;
+    private ImageViewAssets life1;
+    private ImageViewAssets life2;
+    private ImageViewAssets life3;
+    private ImageViewAssets gameOver;
+    private ImageViewAssets completed;
+    private ImageViewAssets coin;
     private Label numberOfCoins;
     private int score = 0;
     private int coins = Main.players.get(0).getDeshCoins();
@@ -123,17 +123,17 @@ public class BrickSlayer {
 
     public void heartsAndCoins()
     {
-        life1 = new ImageViewGameObj(root,"sample/Images/BrickSlayerHeart.png",30,30);
+        life1 = new ImageViewAssets(root,"sample/Images/BrickSlayerHeart.png",30,30);
         life1.setY(15);
         life1.setX(15);
-        life2  = new ImageViewGameObj(root,"sample/Images/BrickSlayerHeart.png",30,30);
+        life2  = new ImageViewAssets(root,"sample/Images/BrickSlayerHeart.png",30,30);
         life2.setY(15);
         life2.setX(45);
-        life3  = new ImageViewGameObj(root,"sample/Images/BrickSlayerHeart.png",30,30);
+        life3  = new ImageViewAssets(root,"sample/Images/BrickSlayerHeart.png",30,30);
         life3.setY(15);
         life3.setX(75);
 
-        coin = new ImageViewGameObj(root,"sample/Images/Coin.png",38,35);
+        coin = new ImageViewAssets(root,"sample/Images/Coin.png",38,35);
         coin.setY(18);
         coin.setX(930);
     }
@@ -175,7 +175,7 @@ public class BrickSlayer {
         return ball; // Returns the ball.
     }
 
-    private BlockSide whichPartHit(Brick block)
+    private BrickSide whichPartHit(Brick block)
     {
 
         final double upcorner = 63.43;
@@ -195,20 +195,20 @@ public class BrickSlayer {
 
         if (upcorner - epsilon <= angle && angle <= upcorner + epsilon) {
             // if hit close to upper corners
-            return BlockSide.BRICK_CORNER;
+            return BrickSide.BRICK_CORNER;
         } else if (botcorner - epsilon <= angle && angle <= botcorner + epsilon) {
             // if hit close to lower corners
-            return BlockSide.BRICK_CORNER;
+            return BrickSide.BRICK_CORNER;
         } else if (0 <= angle && angle < upcorner + epsilon) {
             // check top
-            return BlockSide.BRICK_TOP_BOT;
+            return BrickSide.BRICK_TOP_BOT;
         } else if (botcorner + epsilon < angle) {
             // check bottom
-            return BlockSide.BRICK_TOP_BOT;
+            return BrickSide.BRICK_TOP_BOT;
         } else if (upcorner + epsilon < angle && angle < botcorner - epsilon) {
             // only need 1 for this since angle is the same regardless of which
             // side we're on
-            return BlockSide.BRICK_LT_RT;
+            return BrickSide.BRICK_LT_RT;
         } else {
             throw new IllegalStateException("whichPartHit failed!");
         }
@@ -272,19 +272,19 @@ public class BrickSlayer {
 
             if(lives == 2)
             {
-                life1 = new ImageViewGameObj(root,"sample/Images/BrickSlayerHeartWhite.png",30,30);
+                life1 = new ImageViewAssets(root,"sample/Images/BrickSlayerHeartWhite.png",30,30);
                 life1.setY(15);
                 life1.setX(15);
             }
             else if (lives == 1)
             {
-                life2 = new ImageViewGameObj(root,"sample/Images/BrickSlayerHeartWhite.png",30,30);
+                life2 = new ImageViewAssets(root,"sample/Images/BrickSlayerHeartWhite.png",30,30);
                 life2.setY(15);
                 life2.setX(45);
             }
             else if(lives == 0)
             {
-                life3 = new ImageViewGameObj(root,"sample/Images/BrickSlayerHeartWhite.png",30,30);
+                life3 = new ImageViewAssets(root,"sample/Images/BrickSlayerHeartWhite.png",30,30);
                 life3.setY(15);
                 life3.setX(75);
             }
@@ -293,7 +293,7 @@ public class BrickSlayer {
             {
             timeline.stop(); // Stops the timeline.
             System.out.println("GameOver");
-            gameOver = new ImageViewGameObj(root, "sample/Images/Game_over.png",414,60);
+            gameOver = new ImageViewAssets(root, "sample/Images/Game_over.png",414,60);
             gameOver.setX(280);
             gameOver.setY(220);
 
@@ -351,18 +351,18 @@ public class BrickSlayer {
                 whichPartHit(brick); // Calls the whichPartHit method.
 
                 // Checks if the ball struck the top of the bottom of the block.
-                if (whichPartHit(brick) == BlockSide.BRICK_TOP_BOT)
+                if (whichPartHit(brick) == BrickSide.BRICK_TOP_BOT)
                 {
                     dy = ball.getDy();
                     ball.setDy(-dy); // Changes the Y velocity of the ball.
                 }
                 // Checks if the ball struck the left or right side of the block.
-                else if (whichPartHit(brick) == BlockSide.BRICK_LT_RT)
+                else if (whichPartHit(brick) == BrickSide.BRICK_LT_RT)
                 {
                     ball.setDx(-dx); // Changes the X velocity of the ball.
                 }
                 // Checks if the ball struck one of the corners of the blocks.
-                else if (whichPartHit(brick) == BlockSide.BRICK_CORNER)
+                else if (whichPartHit(brick) == BrickSide.BRICK_CORNER)
                 {
                     dy = ball.getDy();
                     ball.setDx(-dx); // Changes the X velocity of the ball.
@@ -383,7 +383,7 @@ public class BrickSlayer {
         {
             timeline.stop(); // Stops the timer.
 
-            completed = new ImageViewGameObj(root, "sample/Images/Completed.png",464,56);
+            completed = new ImageViewAssets(root, "sample/Images/Completed.png",464,56);
             completed.setX(280);
             completed.setY(230);
             gameDone();

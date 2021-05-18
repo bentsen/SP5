@@ -1,18 +1,10 @@
 package sample;
 
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.geometry.Bounds;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.util.Duration;
 
 import java.util.Random;
 
-import static sample.Constants.*;
-
-public class Ball extends ImageViewGameObj{
+public class Ball extends ImageViewAssets {
     int dy;
     int dx;
 

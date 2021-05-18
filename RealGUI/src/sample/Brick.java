@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import static sample.Constants.*;
 
-public class Brick extends ImageViewGameObj{
+public class Brick extends ImageViewAssets {
     String url;
     private ArrayList<Brick> bricks;
 
