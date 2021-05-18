@@ -6,8 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -148,10 +147,18 @@ public class Scene4Controller {
                 Main.paddleSkins.get(arrayCount).setOwned(true);
                 int temp = Main.players.get(0).getDeshCoins() - Main.paddleSkins.get(arrayCount).getPrice();
                 Main.players.get(0).setDeshCoins(temp);
+                currencyLabel.setText(String.valueOf(Main.players.get(0).getDeshCoins()));
+
+                Image = "Images/Shop/Paddle/PaddleShop" + count + "Owned.png";
+                myImage = new Image(getClass().getResourceAsStream(Image));
+                skinsImage.setImage(myImage);
+
+                equip.setVisible(true);
+                buy.setVisible(false);
             }
             else
             {
-                System.out.println("not enough DeshCoins"); //should be a label
+                lowOnMoney();
             }
         }
 
@@ -162,10 +169,18 @@ public class Scene4Controller {
                 Main.ballSkins.get(arrayCount).setOwned(true);
                 int temp = Main.players.get(0).getDeshCoins() - Main.ballSkins.get(arrayCount).getPrice();
                 Main.players.get(0).setDeshCoins(temp);
+                currencyLabel.setText(String.valueOf(Main.players.get(0).getDeshCoins()));
+
+                Image = "Images/Shop/Ball/BallShop" + count + "Owned.png";
+                myImage = new Image(getClass().getResourceAsStream(Image));
+                skinsImage.setImage(myImage);
+
+                equip.setVisible(true);
+                buy.setVisible(false);
             }
             else
             {
-                System.out.println("not enough DeshCoins"); //should be a label
+               lowOnMoney();
             }
         }
 
@@ -181,6 +196,7 @@ public class Scene4Controller {
          {
             case 1:
                 paddleURL = "sample/Images/Paddles/paddle_og2.png";
+
                 break;
             case 2:
                 paddleURL = "sample/Images/Paddles/paddlemlg.png";
@@ -200,8 +216,17 @@ public class Scene4Controller {
                 break;
 
          }
-            Main.paddleSkinsURL.removeAll(Main.paddleSkinsURL);
-            Main.paddleSkinsURL.add(paddleURL);
+
+            for(int i = 0; i < Main.paddleSkins.size(); i++) {
+                Main.paddleSkins.get(i).setEquipped(false);
+            }
+            String targetURL = paddleURL;
+            for(PaddleSkin c : Main.paddleSkins) {
+                if (targetURL.equals(c.getUrl()))
+                {
+                    c.setEquipped(true);
+                }
+            }
         }
 
         else if(paddle == false && ball == true) //Equip BallSkin
@@ -232,8 +257,16 @@ public class Scene4Controller {
                     break;
 
             }
-            Main.ballSkinsURL.removeAll(Main.ballSkinsURL);
-            Main.ballSkinsURL.add(ballURL);
+            for(int i = 0; i < Main.ballSkins.size(); i++) {
+                Main.ballSkins.get(i).setEquipped(false);
+            }
+            String targetURL = ballURL;
+            for(BallSkin c : Main.ballSkins) {
+                if (targetURL.equals(c.getUrl()))
+                {
+                    c.setEquipped(true);
+                }
+            }
         }
 
     }
@@ -256,6 +289,20 @@ public class Scene4Controller {
         Image = url;
         myImage = new Image(getClass().getResourceAsStream(Image));
         skinsImage.setImage(myImage);
+    }
+
+    public void lowOnMoney()
+    {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Currency");
+        alert.setHeaderText("Not enough DeshCoins");
+        alert.setContentText("play to earn more DeshCoins");
+        stage = (Stage) alert.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image("sample/Images/BrickIcon.png"));
+        DialogPane myDialog = alert.getDialogPane();
+        myDialog.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+        myDialog.getStyleClass().add("myDialog");
+        alert.showAndWait();
     }
 
 }

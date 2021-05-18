@@ -2,5 +2,5 @@ package sample;
 
 
 public enum BlockSide {
-    BLOCK_TOP_BOT, BLOCK_LT_RT, BLOCK_CORNER
+    BRICK_TOP_BOT, BRICK_LT_RT, BRICK_CORNER
 }

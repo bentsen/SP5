@@ -5,14 +5,24 @@ public class BallSkin
     String name;
     String url;
     boolean owned;
+    boolean equipped;
     int price;
 
-    public BallSkin(String name, String url, boolean owned, int price)
+    public BallSkin(String name, String url, boolean owned, int price, boolean equipped)
     {
+        this.equipped = equipped;
         this.price = price;
         this.name = name;
         this.url = url;
         this.owned = owned;
+    }
+
+    public boolean isEquipped() {
+        return equipped;
+    }
+
+    public void setEquipped(boolean equipped) {
+        this.equipped = equipped;
     }
 
     public int getPrice() {

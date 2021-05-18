@@ -9,7 +9,7 @@
 
 <AnchorPane onMouseEntered="#setPosition" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-      <ImageView fx:id="ballImage" fitHeight="25.0" fitWidth="23.0" layoutX="91.0" layoutY="473.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="ballImage" fitHeight="26.0" fitWidth="26.0" layoutX="91.0" layoutY="473.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/Balls/defaultBall.png" />
          </image>

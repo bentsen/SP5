@@ -16,13 +16,14 @@ public class Ball extends ImageViewGameObj{
     int dy;
     int dx;
 
-    public Ball(Pane root)
+    public Ball(Pane root, String url)
     {
-        super(root, Main.ballSkinsURL.get(0));
+        super(root, url);
         dx = 0;
         dy = 0;
 
     }
+
 
     /**
      * Moves the ball according to it's velocity without any bouncing.
@@ -34,7 +35,7 @@ public class Ball extends ImageViewGameObj{
 
     public static int randInRange(int min, int max) {
         Random r = new Random();
-        return r.ints(min, (max + 1)).findFirst().getAsInt();
+        return r.ints(min, (max + 1)).findFirst().getAsInt()+1;
     }
 
 

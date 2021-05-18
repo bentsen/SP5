@@ -2,6 +2,14 @@
     -fx-background-image: url("Images/BrickSlayerBackground.png");
 }
 
+.myDialog{
+    -fx-background-image: url("Images/BrickSlayerBackground.png");
+}
+
+.myDialog:header *.header-panel{
+    -fx-background-image: url("Images/BrickSlayerBackground.png");
+}
+
 .label{
     -fx-font-size: 20;
     -fx-font-family: "lucida Console";

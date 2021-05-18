@@ -2,6 +2,7 @@ package sample;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -10,8 +11,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class Scene3Controller {
+public class Scene3Controller implements Initializable {
 
 
     private Stage stage;
@@ -21,7 +24,13 @@ public class Scene3Controller {
     private boolean play = true;
     @FXML
     Label currencyLabel;
+    @FXML
+    Label number1Label;
 
+    public void initialize(URL location, ResourceBundle resourceBundle)
+    {
+        number1Label.setText("1. " + Main.players.get(0).getName() + " " + Main.players.get(0).getScore());
+    }
 
     public void switchToScene1(MouseEvent mouseEvent) throws IOException
     {
@@ -33,6 +42,7 @@ public class Scene3Controller {
         scene.getStylesheets().add(css);
 
     }
+
 
 
 

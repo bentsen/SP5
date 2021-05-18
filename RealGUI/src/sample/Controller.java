@@ -41,6 +41,7 @@ public class Controller implements Initializable {
     private boolean play = true;
     private String image;
     private String image2;
+    private DBConnector connector = new DBConnector();
 
     @FXML
     private ImageView paddleImage;
@@ -69,8 +70,8 @@ public class Controller implements Initializable {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-
         scene.getStylesheets().add(css);
+
     }
 
 
@@ -81,10 +82,7 @@ public class Controller implements Initializable {
         Scene3Controller scene3Controller = loader.getController();
         scene3Controller.currencyLabel.setText(String.valueOf(Main.players.get(0).getDeshCoins()));
         stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-        scene.getStylesheets().add(css);
+        changeScene();
     }
 
 
@@ -95,10 +93,7 @@ public class Controller implements Initializable {
         Scene4Controller scene4Controller = loader.getController();
         scene4Controller.currencyLabel.setText(String.valueOf(Main.players.get(0).getDeshCoins()));
         stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-        scene.getStylesheets().add(css);
+        changeScene();
     }
 
     public void Scene5(javafx.event.ActionEvent actionEvent) throws IOException
@@ -108,10 +103,7 @@ public class Controller implements Initializable {
         Scene5Controller scene5Controller = loader.getController();
         scene5Controller.currencyLabel.setText(String.valueOf(Main.players.get(0).getDeshCoins()));
         stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-        scene.getStylesheets().add(css);
+        changeScene();
     }
 
     public void Scene6(MouseEvent mouseEvent) throws IOException
@@ -121,52 +113,44 @@ public class Controller implements Initializable {
         Scene6Controller scene6Controller = loader.getController();
         scene6Controller.currencyLabel.setText(String.valueOf(Main.players.get(0).getDeshCoins()));
         stage = (Stage) ((Node)mouseEvent.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-        scene.getStylesheets().add(css);
+        changeScene();
     }
 
     public void exitGame(javafx.event.ActionEvent actionEvent) throws IOException
     {
+        connector.savePlayers();
+        connector.saveBallSkin();
+        connector.savePaddleSkin();
         System.exit(0);
     }
 
 
     public void setPosition()
     {
-        if(Main.paddleSkinsURL.size() == 0)
+        for(int i = 0; i < Main.paddleSkins.size(); i++)
         {
-            image = "Images/Paddles/paddle_og2.png";
-            myImage = new Image(getClass().getResourceAsStream(image));
-            paddleImage.setImage(myImage);
+            if(Main.paddleSkins.get(i).isEquipped())
+            {
+                image = Main.paddleSkins.get(i).getUrl();
+                String original = Main.paddleSkins.get(i).getUrl();
+                String newString = original.replace("sample/","");
+                myImage = new Image(getClass().getResourceAsStream(newString));
+                paddleImage.setImage(myImage);
+            }
         }
-        else if(Main.paddleSkinsURL.size() > 0)
+
+        for(int i = 0; i < Main.ballSkins.size(); i++)
         {
-            image = Main.paddleSkinsURL.get(0);
-
-            String original = Main.paddleSkinsURL.get(0);
-            String newString = original.replace("sample/","");
-
-            myImage = new Image(getClass().getResourceAsStream(newString));
-            paddleImage.setImage(myImage);
+            if(Main.ballSkins.get(i).isEquipped())
+            {
+                image2 = Main.ballSkins.get(i).getUrl();
+                String original = Main.ballSkins.get(i).getUrl();
+                String newString = original.replace("sample/","");
+                myBallImage = new Image(getClass().getResourceAsStream(newString));
+                ballImage.setImage(myBallImage);
+            }
         }
-        if(Main.ballSkinsURL.size() == 0)
-        {
-            image2 = "Images/Balls/defaultBall.png";
-            myBallImage = new Image(getClass().getResourceAsStream(image2));
-            ballImage.setImage(myBallImage);
-        }
-        else if(Main.ballSkinsURL.size() > 0)
-        {
-            image2 = Main.ballSkinsURL.get(0);
 
-            String original = Main.ballSkinsURL.get(0);
-            String newString = original.replace("sample/","");
-
-            myBallImage = new Image(getClass().getResourceAsStream(newString));
-            ballImage.setImage(myBallImage);
-        }
 
         if(play) {
             TranslateTransition tt = new TranslateTransition(Duration.seconds(3), paddleImage);
@@ -215,5 +199,14 @@ public class Controller implements Initializable {
         gameStage.setTitle("Brick Slayer");
         scene.getStylesheets().add(css);
         gameStage.setResizable(false);
+    }
+
+
+    public void changeScene()
+    {
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        scene.getStylesheets().add(css);
     }
 }

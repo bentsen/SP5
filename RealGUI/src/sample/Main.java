@@ -32,50 +32,18 @@ import java.util.ArrayList;
 public class Main extends Application
 {
     public String css = this.getClass().getResource("application.css").toExternalForm();
-    public static ArrayList<String> paddleSkinsURL = new ArrayList<>();
-    public static ArrayList<String> ballSkinsURL = new ArrayList<>();
     public static ArrayList<PaddleSkin> paddleSkins = new ArrayList<>();
     public static ArrayList<BallSkin> ballSkins = new ArrayList<>();
     public static ArrayList<Player> players = new ArrayList<>();
-
+    public static DBConnector connector = new DBConnector();
     public static Clip clip;
     public static Clip effectClip;
 
     public static void main(String[] args)
     {
-        //should be loaded from database
-        PaddleSkin paddleSkin = new PaddleSkin("Default","sample/Images/Paddles/paddle_og2.png",true,0);
-        PaddleSkin paddleSkin1 = new PaddleSkin("Lightsaber","sample/Images/Paddles/paddlelightsaber.png", true,1000);
-        PaddleSkin paddleSkin2 = new PaddleSkin("Diamond","sample/Images/Paddles/paddlediamond.png", false,750);
-        PaddleSkin paddleSkin3 = new PaddleSkin("Chrome","sample/Images/Paddles/paddlechrome.png", false,750);
-        PaddleSkin paddleSkin4 = new PaddleSkin("mlg","sample/Images/Paddles/paddlemlg.png", true,500);
-        PaddleSkin paddleSkin5 = new PaddleSkin("Nyancat","sample/Images/Paddles/paddle nyancat.png", false,500);
-        paddleSkins.add(paddleSkin);
-        paddleSkins.add(paddleSkin4);
-        paddleSkins.add(paddleSkin5);
-        paddleSkins.add(paddleSkin3);
-        paddleSkins.add(paddleSkin2);
-        paddleSkins.add(paddleSkin1);
-
-        //shold be loaded from database
-        BallSkin ballSkin = new BallSkin("Default","sample/Images/Balls/defaultBall.png",true,0);
-        BallSkin ballSkin6 = new BallSkin("Steve","sample/Images/Balls/ball steve.png",true,500);
-        BallSkin ballSkin1 = new BallSkin("Yoda","sample/Images/Balls/ball yoda.png",false,500);
-        BallSkin ballSkin2 = new BallSkin("Pokeball","sample/Images/Balls/ball pokeball.png",false,750);
-        BallSkin ballSkin3 = new BallSkin("Pacman","sample/Images/Balls/ball pacman.png",true,750);
-        BallSkin ballSkin4 = new BallSkin("Imposter","sample/Images/Balls/ball imposter.png",false,750);
-        BallSkin ballSkin5 = new BallSkin("Gilli","sample/Images/Balls/ballgilli.png",false,1000);
-        ballSkins.add(ballSkin);
-        ballSkins.add(ballSkin6);
-        ballSkins.add(ballSkin1);
-        ballSkins.add(ballSkin2);
-        ballSkins.add(ballSkin3);
-        ballSkins.add(ballSkin4);
-        ballSkins.add(ballSkin5);
-
-        Player player = new Player("Mikkel", 20, 1000);
-        players.add(player);
-
+        paddleSkins = connector.loadPaddleSkin();
+        ballSkins = connector.loadBallSkin();
+        players = connector.loadPlayer();
         launch(args);
     }
 
@@ -94,7 +62,6 @@ public class Main extends Application
                         (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
                 gainControl.setValue(volume); // Reduce volume by decibels.
                 clip.start();
-
             }
             else
             {
@@ -134,7 +101,13 @@ public class Main extends Application
 
     @Override
     public void start(Stage stage) throws Exception {
-            music("src/sample/Music/Music.wav",-10.0f);
+        stage.setOnCloseRequest(
+                event -> {
+                    connector.savePlayers();
+                    connector.saveBallSkin();
+                    connector.savePaddleSkin();
+                });
+            music("src/sample/Music/IntroMusic.wav",-10.0f);
             Parent root = FXMLLoader.load(getClass().getResource("Scenes/Scene1.fxml"));
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -148,6 +121,32 @@ public class Main extends Application
             stage.setTitle("Brick Slayer");
             scene.getStylesheets().add(css);
 
+    }
+
+    public static String getEquipped()
+    {
+        for(PaddleSkin p : paddleSkins)
+        {
+            if(p.isEquipped())
+            {
+                return p.getUrl();
+            }
+        }
+        System.out.println("There is no PaddleSkin equipped");
+        return null;
+    }
+
+    public static String getEquippedBall()
+    {
+        for(BallSkin b : ballSkins)
+        {
+            if(b.isEquipped())
+            {
+                return b.getUrl();
+            }
+        }
+        System.out.println("There is no PaddleSkin equipped");
+        return null;
     }
 
 }
