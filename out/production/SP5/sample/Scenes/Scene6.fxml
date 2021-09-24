@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Scene6Controller">
+   <children>
+      <Label fx:id="backToMenuLabel" layoutX="57.0" layoutY="53.0" onMousePressed="#switchToScene1" text="&lt; .Back To Menu">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+      <ImageView fitHeight="29.0" fitWidth="83.0" layoutX="305.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Bricks/BlueBrick.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="29.0" fitWidth="83.0" layoutX="305.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Bricks/OrangeBrick.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="29.0" fitWidth="83.0" layoutX="305.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Bricks/RedBrick.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="29.0" fitWidth="83.0" layoutX="305.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Bricks/LightBlueBrick.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="29.0" fitWidth="83.0" layoutX="305.0" layoutY="350.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Bricks/GreenBrick.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="29.0" fitWidth="83.0" layoutX="305.0" layoutY="400.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Bricks/GrayBrick.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="394.0" layoutY="154.0" text="-2 Hits" />
+      <ImageView fitHeight="29.0" fitWidth="83.0" layoutX="561.0" layoutY="151.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Bricks/BlueBrickBroken.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="29.0" fitWidth="83.0" layoutX="561.0" layoutY="201.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Bricks/OrangeBrickBroken.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="29.0" fitWidth="83.0" layoutX="561.0" layoutY="251.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Bricks/RedBrickBroken.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="29.0" fitWidth="83.0" layoutX="561.0" layoutY="301.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Bricks/LightBlueBrickBroken.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="29.0" fitWidth="83.0" layoutX="561.0" layoutY="351.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Bricks/GreenBrickBroken.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="29.0" fitWidth="83.0" layoutX="561.0" layoutY="401.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Bricks/GrayBrickBroken.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="561.0" layoutY="120.0" text="1 Hit Left" />
+      <Label layoutX="305.0" layoutY="119.0" text="Hits" />
+      <Label layoutX="394.0" layoutY="203.0" text="-2 Hits" />
+      <Label layoutX="394.0" layoutY="254.0" text="-2 Hits" />
+      <Label layoutX="394.0" layoutY="304.0" text="-2 Hits" />
+      <Label layoutX="394.0" layoutY="354.0" text="-2 Hits" />
+      <Label layoutX="394.0" layoutY="404.0" text="-2 Hits" />
+   </children>
+</AnchorPane>

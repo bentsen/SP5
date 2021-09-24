@@ -1,0 +1,410 @@
+@startuml
+
+title __SAMPLE's Class Diagram__\n
+
+  namespace sample {
+    class sample.Ball {
+        ~ dx : int
+        ~ dy : int
+        + Ball()
+        + getDx()
+        + getDy()
+        + getX()
+        + getY()
+        + move()
+        {static} + randInRange()
+        + setDx()
+        + setDy()
+        + setX()
+        + setY()
+    }
+  }
+  
+
+  namespace sample {
+    class sample.BallSkin {
+        ~ equipped : boolean
+        ~ name : String
+        ~ owned : boolean
+        ~ price : int
+        ~ url : String
+        + BallSkin()
+        + getName()
+        + getPrice()
+        + getUrl()
+        + isEquipped()
+        + isOwned()
+        + setEquipped()
+        + setName()
+        + setOwned()
+        + setPrice()
+        + setUrl()
+    }
+  }
+  
+
+  namespace sample {
+    enum BlockSide {
+      BRICK_CORNER
+      BRICK_LT_RT
+      BRICK_TOP_BOT
+    }
+  }
+  
+
+  namespace sample {
+    class sample.Brick {
+        ~ url : String
+        - bricks : ArrayList<Brick>
+        + Brick()
+        + setUrl()
+        + setX()
+        + setY()
+        + toString()
+    }
+  }
+  
+
+  namespace sample {
+    class sample.BrickSlayer {
+        ~ dx : int
+        ~ dy : int
+        ~ hit : boolean
+        - bounceBottom : boolean
+        - bricks : ArrayList<Brick>
+        - coins : int
+        - css : String
+        - delayMs : double
+        - lives : int
+        - mx : double
+        - numberOfCoins : Label
+        - root : Pane
+        - scene : Scene
+        - score : int
+        - stage : Stage
+        - testTop : boolean
+        - timeline : Timeline
+        + BrickSlayer()
+        + brickCollision()
+        + brickLayer()
+        + gameDone()
+        {static} + getLevelDataFromSession()
+        + getRoot()
+        {static} + getUserInput()
+        + heartsAndCoins()
+        + lifeLoss()
+        + numCoins()
+        + paddleAndBall()
+        + paddleCollision()
+        + playTime()
+        {static} + saveLevelData()
+        + start()
+        + updateBall()
+        - whichPartHit()
+    }
+  }
+  
+
+  namespace sample {
+    interface sample.Constants {
+        {static} + brickBorder : int
+        {static} + brickHeight : int
+        {static} + brickLimit : int
+        {static} + brickStart : int
+        {static} + brickWidth : int
+        {static} + endOfFifthRow : int
+        {static} + endOfFourthRow : int
+        {static} + endOfSecondRow : int
+        {static} + endOfThirdRow : int
+        {static} + fifthH : int
+        {static} + fifthRow : int
+        {static} + fourthH : int
+        {static} + fourthRow : int
+        {static} + rowSetter2 : int
+        {static} + rowSetter3 : int
+        {static} + rowSetter4 : int
+        {static} + rowSetter5 : int
+        {static} + sceneHeight : int
+        {static} + sceneWidth : int
+        {static} + secondH : int
+        {static} + secondRow : int
+        {static} + thirdH : int
+        {static} + thirdRow : int
+        {static} + velocityScaler : int
+    }
+  }
+  
+
+  namespace sample {
+    class sample.Controller {
+        - ballImage : ImageView
+        - css : String
+        - currencyLabel : Label
+        - image : String
+        - image2 : String
+        - myBallImage : Image
+        - myImage : Image
+        - paddleImage : ImageView
+        - play : boolean
+        - root : Parent
+        - scene : Scene
+        - stage : Stage
+        + Scene2()
+        + Scene3()
+        + Scene4()
+        + Scene5()
+        + Scene6()
+        + changeScene()
+        + exitGame()
+        + initialize()
+        + setPosition()
+        + start2()
+    }
+  }
+  
+
+  namespace sample {
+    class sample.DBConnector {
+        {static} ~ DB_URL : String
+        {static} ~ JDBC_DRIVER : String
+        {static} ~ PASS : String
+        {static} ~ USER : String
+        + loadBallSkin()
+        + loadPaddleSkin()
+        + loadPlayer()
+        + saveBallSkin()
+        + savePaddleSkin()
+        + savePlayers()
+    }
+  }
+  
+
+  namespace sample {
+    class sample.ImageViewGameObj {
+        - imageView : ImageView
+        - speed : double
+        - url : String
+        + ImageViewGameObj()
+        + ImageViewGameObj()
+        + getBounds()
+        + getHalfHeight()
+        + getHalfWidth()
+        + getHeight()
+        + getImageView()
+        + getSpeed()
+        + getUrl()
+        + getWidth()
+        + getX()
+        + getY()
+        + setImageView()
+        + setUrl()
+        + setX()
+        + setY()
+        + toString()
+    }
+  }
+  
+
+  namespace sample {
+    class sample.Main {
+        {static} + ballSkins : ArrayList<BallSkin>
+        {static} + clip : Clip
+        {static} + connector : DBConnector
+        + css : String
+        {static} + effectClip : Clip
+        {static} + paddleSkins : ArrayList<PaddleSkin>
+        {static} + players : ArrayList<Player>
+        {static} + effect()
+        {static} + getEquipped()
+        {static} + getEquippedBall()
+        {static} + main()
+        {static} + music()
+        + start()
+    }
+  }
+  
+
+  namespace sample {
+    class sample.Map {
+        ~ id : int
+        ~ locked : Boolean
+        + Map()
+        + getId()
+        + getLocked()
+        + setId()
+        + setLocked()
+    }
+  }
+  
+
+  namespace sample {
+    class sample.Paddle {
+        + Paddle()
+    }
+  }
+  
+
+  namespace sample {
+    class sample.PaddleSkin {
+        ~ equipped : boolean
+        ~ name : String
+        ~ owned : boolean
+        ~ price : int
+        ~ url : String
+        + PaddleSkin()
+        + getName()
+        + getPrice()
+        + getUrl()
+        + isEquipped()
+        + isOwned()
+        + setEquipped()
+        + setName()
+        + setOwned()
+        + setPrice()
+        + setUrl()
+    }
+  }
+  
+
+  namespace sample {
+    class sample.Player {
+        ~ deshCoins : int
+        ~ name : String
+        ~ score : int
+        + Player()
+        + getDeshCoins()
+        + getName()
+        + getScore()
+        + setDeshCoins()
+        + setName()
+        + setScore()
+    }
+  }
+  
+
+  namespace sample {
+    class sample.Scene2Controller {
+        ~ currencyLabel : Label
+        ~ paddleImage : ImageView
+        - css : String
+        - parent : Parent
+        - root : Parent
+        - scene : Scene
+        - stage : Stage
+        + initialize()
+        + switchToScene1()
+        - contentSelect()
+    }
+  }
+  
+
+  namespace sample {
+    class sample.Scene3Controller {
+        ~ currencyLabel : Label
+        ~ number1Label : Label
+        - css : String
+        - parent : Parent
+        - play : boolean
+        - scene : Scene
+        - stage : Stage
+        + initialize()
+        + switchToScene1()
+    }
+  }
+  
+
+  namespace sample {
+    class sample.Scene4Controller {
+        ~ currencyLabel : Label
+        - Image : String
+        - arrayCount : int
+        - ball : boolean
+        - buy : Button
+        - count : int
+        - css : String
+        - equip : Button
+        - myImage : Image
+        - owned : boolean
+        - paddle : boolean
+        - scene : Scene
+        - skinsImage : ImageView
+        - stage : Stage
+        + BallClick()
+        + Buy()
+        + PaddleClick()
+        + equip()
+        + lastSkin()
+        + lowOnMoney()
+        + nextSkin()
+        + ownerShip()
+        + paddleOrBall()
+        + switchToScene1()
+    }
+  }
+  
+
+  namespace sample {
+    class sample.Scene5Controller {
+        ~ currencyLabel : Label
+        ~ maps : ArrayList<Map>
+        - Image : String
+        - arrayCount : int
+        - count : int
+        - css : String
+        - headerLabel : Label
+        - imageLocked : ImageView
+        - myImage : Image
+        - myImageView : ImageView
+        - parent : Parent
+        - scene : Scene
+        - stage : Stage
+        + initialize()
+        + lastLevel()
+        + mapCompleted()
+        + nextLevel()
+        + switchToScene1()
+        - contentSelect()
+    }
+  }
+  
+
+  namespace sample {
+    class sample.Scene6Controller {
+        ~ currencyLabel : Label
+        - css : String
+        - play : boolean
+        - scene : Scene
+        - stage : Stage
+        + switchToScene1()
+    }
+  }
+  
+
+  sample.Ball -up-|> sample.ImageViewGameObj
+  sample.Brick -up-|> sample.ImageViewGameObj
+  sample.BrickSlayer o-- sample.Ball : ball
+  sample.BrickSlayer o-- sample.Brick : brick
+  sample.BrickSlayer o-- sample.ImageViewGameObj : coin
+  sample.BrickSlayer o-- sample.ImageViewGameObj : completed
+  sample.BrickSlayer o-- sample.ImageViewGameObj : gameOver
+  sample.BrickSlayer o-- sample.ImageViewGameObj : life1
+  sample.BrickSlayer o-- sample.ImageViewGameObj : life2
+  sample.BrickSlayer o-- sample.ImageViewGameObj : life3
+  sample.BrickSlayer o-- sample.Paddle : paddle
+  sample.Controller .up.|> javafx.fxml.Initializable
+  sample.Controller o-- sample.DBConnector : connector
+  sample.Main -up-|> javafx.application.Application
+  sample.Paddle -up-|> sample.ImageViewGameObj
+  sample.Scene2Controller .up.|> javafx.fxml.Initializable
+  sample.Scene3Controller .up.|> javafx.fxml.Initializable
+  sample.Scene5Controller .up.|> javafx.fxml.Initializable
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml
